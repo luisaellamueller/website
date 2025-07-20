@@ -1,96 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Luisa Müller</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-TqZQ68xjbHYodOKeE+gAmX5JoW5t+DWqPfTXmZHYT0R7VX6TmqvHcy34KtBAFiK8z/iwbwIbCGnZmUpWcS/jzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
+    :root {
+      --bg-dark: #0a0f1c;
+      --bg-light: #ffffff;
+      --text-light: #dbe8f4;
+      --text-dark: #2c3e50;
+      --accent: #6eb5d3;
+      --accent-hover: #90d0e8;
+      --link: #4dabf7;
+      --card-bg: #2a3e4c;
+      --card-bg-light: #f8f9fa;
+    }
+    
     body {
       font-family: system-ui, sans-serif;
-      background: #121212;
-      color: #e0e0e0;
       max-width: 600px;
       margin: 4rem auto;
       padding: 0 1rem;
       text-align: center;
+      transition: background 0.3s, color 0.3s;
     }
-
+    
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-light);
+    }
+    
+    body:not(.dark) {
+      background: var(--bg-light);
+      color: var(--text-dark);
+    }
+    
     img {
       width: 150px;
       height: 150px;
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 1rem;
+      border: 3px solid var(--accent);
     }
-
+    
     h1 {
-      display: block;
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
+    }
+    
+    body.dark h1 {
       color: #ffffff;
     }
-
+    
+    body:not(.dark) h1 {
+      color: var(--text-dark);
+    }
+    
     p {
       font-size: 1.1rem;
       margin: 0.5rem 0;
-      color: #cccccc;
     }
-
-    .stations {
-      margin-top: 1.5rem;
-    }
-
-    .stations a {
-      display: block;
-      margin: 0.5rem 0;
-      font-size: 1.1rem;
-      color: #cccccc;
-      text-decoration: none;
-    }
-
-    .stations a:hover {
-      color: #4dabf7;
-    }
-
+    
+    .stations,
     .links {
       margin-top: 1.5rem;
     }
-
+    
+    .stations span {
+      display: block;
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+      padding: 0.4rem;
+    }
+    
+    body.dark .stations span {
+      color: var(--text-light);
+    }
+    
+    body:not(.dark) .stations span {
+      color: var(--text-dark);
+    }
+    
     .links a {
       display: block;
       margin: 0.5rem 0;
-      text-decoration: none;
-      color: #4dabf7;
       font-size: 1.1rem;
+      text-decoration: none;
+      padding: 0.4rem;
+      border-radius: 6px;
+      color: var(--link);
     }
-
-    .links a i {
+    
+    .links a:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+    
+    .links a i,
+    .stations span i {
       margin-right: 8px;
     }
-
-    .links a:hover {
-      text-decoration: underline;
+    
+    .toggle-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--accent);
+    }
+    
+    .toggle-btn:hover {
+      color: var(--accent-hover);
     }
   </style>
 </head>
-<body>
+<body class="dark">
+  <button class="toggle-btn" onclick="toggleMode()">
+    <i id="mode-icon" class="fas fa-sun"></i>
+  </button>
   <img src="luisaportrait.jpeg" alt="Luisa Müller" />
   <h1>Luisa Müller</h1>
   <p><em>If you can dream it, you can do it.</em></p>
-
   <div class="stations">
-    <a>MCS@ETH</a>
-    <a>BCS@HSG</a>
-    <a>SoftwareEngineering@APP</a>
-    <a>DataScience@Porsche</a>
+    <span><i class="fas fa-code"></i>MCS@ETH</span>
+    <span><i class="fas fa-code"></i>BCS@HSG</span>
+    <span><i class="fas fa-code"></i>SoftwareEngineering@APP</span>
+    <span><i class="fas fa-code"></i>DataScience@Porsche</span>
   </div>
-
   <div class="links">
     <a href="mailto:luisaellamaria@protonmail.com"><i class="fas fa-envelope"></i>Email</a>
     <a href="https://github.com/luisaellamueller" target="_blank"><i class="fab fa-github"></i>GitHub</a>
     <a href="https://linkedin.com/in/luisamueller" target="_blank"><i class="fab fa-linkedin-in"></i>LinkedIn</a>
   </div>
+  <script>
+    function toggleMode() {
+      const body = document.body;
+      const icon = document.getElementById('mode-icon');
+      
+      body.classList.toggle('dark');
+      
+      if (body.classList.contains('dark')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    }
+  </script>
 </body>
 </html>
